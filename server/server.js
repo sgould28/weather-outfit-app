@@ -11,14 +11,21 @@ app.use(express.static("public"));
 app.get("/outfit", async (req, res) => {
     const city = req.query.city?.trim();
     const aesthetic = req.query.aesthetic?.trim().toLowerCase();
+    const units = req.query.units?.trim().toLowerCase() || "metric";
 
     if (!city) {
         return res.status(400).json({ error: "City is required." });
     }
 
-    const validAesthetics = ["casual", "formal", "sporty"];
+    const validAesthetics = ["casual", "cute", "edgy"];
+    const validUnits = ["metric", "imperial"];
+
     if (aesthetic && !validAesthetics.includes(aesthetic)) {
-        return res.status(400).json({ error: "Aesthetic must be casual, formal, or sporty." });
+        return res.status(400).json({ error: "Aesthetic must be casual, cute, or edgy." });
+    }
+
+    if (!validUnits.includes(units)) {
+        return res.status(400).json({ error: "Units must be metric or imperial." });
     }
 
     if (!API_KEY) {
@@ -26,7 +33,7 @@ app.get("/outfit", async (req, res) => {
     }
 
     try {
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${API_KEY}`;
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=${units}&appid=${API_KEY}`;
         const response = await fetch(weatherUrl);
         const weather = await response.json();
 
@@ -41,7 +48,8 @@ app.get("/outfit", async (req, res) => {
             aesthetic: aesthetic || "casual",
             weather: {
                 temp: weather.main.temp,
-                description: weather.weather[0].description
+                description: weather.weather[0].description,
+                units
             },
             outfit
         });

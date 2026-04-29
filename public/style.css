@@ -1,9 +1,92 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
+    background-color: rgb(246, 190, 214);
+}
+h1{
+    text-align: center;
+    color:deeppink;
+
+}
+#container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.section {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.controls-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    max-width: 520px;
+}
+
+.controls-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.controls-row input,
+.controls-row select {
+    flex: 1 1 150px;
+    max-width: 240px;
+}
+
+.controls-group button {
+    align-self: flex-start;
+    width: auto;
+    min-width: 140px;
 }
 
 #result {
     margin-top: 20px;
     padding: 10px;
+    color: deeppink;
+    text-align: center;
+}
+
+.outfit-grid {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+}
+
+.outfit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.outfit-item img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid deeppink;
+}
+
+.outfit-item-text {
+    text-align: left;
+}
+
+.image-note {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #6b0f55;
 }
