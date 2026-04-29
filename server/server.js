@@ -9,19 +9,46 @@ const app = express();
 app.use(express.static("public"));
 
 app.get("/outfit", async (req, res) => {
-    const city = req.query.city;
+    const city = req.query.city?.trim();
+    const aesthetic = req.query.aesthetic?.trim().toLowerCase();
 
-    // Fetch weather
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
-    const weather = await fetch(weatherUrl).then(r => r.json());
+    if (!city) {
+        return res.status(400).json({ error: "City is required." });
+    }
 
-    // Get clothes from DB
-    const clothes = await db.getClothes();
+    const validAesthetics = ["casual", "formal", "sporty"];
+    if (aesthetic && !validAesthetics.includes(aesthetic)) {
+        return res.status(400).json({ error: "Aesthetic must be casual, formal, or sporty." });
+    }
 
-    // Pick outfit
-    const outfit = pickOutfit(weather, clothes);
+    if (!API_KEY) {
+        return res.status(500).json({ error: "Missing OpenWeather API key." });
+    }
 
-    res.json(outfit);
+    try {
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${API_KEY}`;
+        const response = await fetch(weatherUrl);
+        const weather = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({ error: weather.message || "Unable to fetch weather data." });
+        }
+
+        const clothes = await db.getClothes();
+        const outfit = pickOutfit(weather, clothes, aesthetic || "casual");
+
+        res.json({
+            aesthetic: aesthetic || "casual",
+            weather: {
+                temp: weather.main.temp,
+                description: weather.weather[0].description
+            },
+            outfit
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error retrieving outfit." });
+    }
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
