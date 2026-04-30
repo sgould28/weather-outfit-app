@@ -39,21 +39,36 @@ document.getElementById("getOutfitBtn").addEventListener("click", async () => {
         };
 
         result.innerHTML = `
-            <h2>Recommended Outfit</h2>
-            <p>Aesthetic: ${data.aesthetic}</p>
-            <p>Weather: ${data.weather.temp}${unitSymbol}, ${data.weather.description}</p>
-            <div class="outfit-grid">
-                <div>
-                    <h3>Top</h3>
-                    ${formatItem(data.outfit.top)}
+            <div class="outfit-columns">
+                <div class="outfit-desc">
+                    <h2>Recommended Outfit</h2>
+                    <p>Aesthetic: ${data.aesthetic}</p>
+                    <p>Weather: ${data.weather.temp}${unitSymbol}, ${data.weather.description}</p>
+                    <div class="outfit-list">
+                        <div>
+                            <h3>Top</h3>
+                            <p>${data.outfit.top?.name || "None"}</p>
+                        </div>
+                        <div>
+                            <h3>Bottom</h3>
+                            <p>${data.outfit.bottom?.name || "None"}</p>
+                        </div>
+                        <div>
+                            <h3>Shoes</h3>
+                            <p>${data.outfit.shoes?.name || "None"}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3>Bottom</h3>
-                    ${formatItem(data.outfit.bottom)}
-                </div>
-                <div>
-                    <h3>Shoes</h3>
-                    ${formatItem(data.outfit.shoes)}
+                <div class="outfit-pics">
+                    ${[data.outfit.top, data.outfit.bottom, data.outfit.shoes]
+                        .filter(item => item && item.image)
+                        .map(item => `
+                            <div class="outfit-picture-card">
+                                <img src="${item.image}" alt="${item.name}">
+                                <p>${item.name}</p>
+                            </div>
+                        `)
+                        .join("")}
                 </div>
             </div>
         `;

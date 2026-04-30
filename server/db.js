@@ -48,37 +48,57 @@ db.serialize(() => {
         const hasStyle = columns.some(column => column.name === "style");
         const hasImage = columns.some(column => column.name === "image");
 
-        if (!hasStyle) {
-            db.run("ALTER TABLE clothes ADD COLUMN style TEXT DEFAULT 'casual'");
-        }
+        const initClothesRows = () => {
+            db.all("SELECT name, image FROM clothes", (err, rows) => {
+                if (err) {
+                    console.error("Unable to read clothes rows", err);
+                    return;
+                }
 
-        if (!hasImage) {
-            db.run("ALTER TABLE clothes ADD COLUMN image TEXT");
-        }
+                const existingNames = new Set(rows.map(row => row.name));
+                const insertStmt = db.prepare("INSERT INTO clothes (name, type, warmth_level, waterproof, style, image) VALUES (?, ?, ?, ?, ?, ?)");
+                defaultClothes.forEach(item => {
+                    if (!existingNames.has(item.name)) {
+                        insertStmt.run(item.name, item.type, item.warmth_level, item.waterproof, item.style, item.image || null);
+                    }
+                });
+                insertStmt.finalize();
 
-        db.all("SELECT name, image FROM clothes", (err, rows) => {
-            if (err) {
-                console.error("Unable to read clothes rows", err);
-                return;
+                const updateStmt = db.prepare("UPDATE clothes SET image = ? WHERE name = ? AND (image IS NULL OR image = '')");
+                defaultClothes.forEach(item => {
+                    if (item.image) {
+                        updateStmt.run(item.image, item.name);
+                    }
+                });
+                updateStmt.finalize();
+            });
+        };
+
+        const maybeAddImage = () => {
+            if (!hasImage) {
+                db.run("ALTER TABLE clothes ADD COLUMN image TEXT", err => {
+                    if (err) {
+                        console.error("Unable to add image column", err);
+                        return;
+                    }
+                    initClothesRows();
+                });
+            } else {
+                initClothesRows();
             }
+        };
 
-            const existingNames = new Set(rows.map(row => row.name));
-            const insertStmt = db.prepare("INSERT INTO clothes (name, type, warmth_level, waterproof, style, image) VALUES (?, ?, ?, ?, ?, ?)");
-            defaultClothes.forEach(item => {
-                if (!existingNames.has(item.name)) {
-                    insertStmt.run(item.name, item.type, item.warmth_level, item.waterproof, item.style, item.image || null);
+        if (!hasStyle) {
+            db.run("ALTER TABLE clothes ADD COLUMN style TEXT DEFAULT 'casual'", err => {
+                if (err) {
+                    console.error("Unable to add style column", err);
+                    return;
                 }
+                maybeAddImage();
             });
-            insertStmt.finalize();
-
-            const updateStmt = db.prepare("UPDATE clothes SET image = ? WHERE name = ? AND (image IS NULL OR image = '')");
-            defaultClothes.forEach(item => {
-                if (item.image) {
-                    updateStmt.run(item.image, item.name);
-                }
-            });
-            updateStmt.finalize();
-        });
+        } else {
+            maybeAddImage();
+        }
     });
 });
 

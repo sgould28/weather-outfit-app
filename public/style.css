@@ -59,34 +59,71 @@ h1{
     text-align: center;
 }
 
-.outfit-grid {
-    display: grid;
-    gap: 18px;
-    width: 100%;
-}
-
-.outfit-item {
+.outfit-columns {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
     flex-wrap: wrap;
+    gap: 24px;
+    width: 100%;
+    justify-content: center;
 }
 
-.outfit-item img {
-    width: 96px;
-    height: 96px;
+.outfit-desc,
+.outfit-pics {
+    flex: 1 1 300px;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.outfit-desc h2,
+.outfit-desc h3,
+.outfit-pics h3 {
+    color: deeppink;
+    margin-top: 0;
+}
+
+.outfit-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.outfit-list h3 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.outfit-list p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.outfit-pics {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+}
+
+.outfit-picture-card {
+    display: grid;
+    gap: 10px;
+    text-align: center;
+}
+
+.outfit-picture-card img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 2px solid deeppink;
 }
 
-.outfit-item-text {
-    text-align: left;
-}
-
-.image-note {
-    margin: 4px 0 0;
-    font-size: 0.9rem;
+.outfit-picture-card p {
+    margin: 0;
+    font-size: 0.95rem;
     color: #6b0f55;
 }
