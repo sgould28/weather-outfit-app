@@ -23,7 +23,23 @@ const defaultClothes = [
     { name: "Ballet Flats", type: "shoes", warmth_level: 2, waterproof: 0, style: "cute", image: "images/ballet_flats.png" },
     { name: "Chunky Mary Janes", type: "shoes", warmth_level: 3, waterproof: 0, style: "cute", image: "images/chunky_mary_janes.png" },
     { name: "Combat Boots", type: "shoes", warmth_level: 6, waterproof: 1, style: "edgy", image: "images/combat_boots.png" },
-    { name: "Platform Sneakers", type: "shoes", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/platform_sneakers.png" }
+    { name: "Platform Sneakers", type: "shoes", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/platform_sneakers.png" },
+    { name: "Windbreaker", type: "top", warmth_level: 7, waterproof: 0, style: "casual", image: "images/windbreaker.png" },
+    { name: "White Skirt", type: "bottom", warmth_level: 3, waterproof: 0, style: "cute", image: "images/white_skirt.png" },
+    { name: "White Flowy Shirt", type: "top", warmth_level: 3, waterproof: 0, style: "cute", image: "images/white_flowy_tank.png" },
+    { name: "Black Puffer Jacket", type: "top", warmth_level: 9, waterproof: 1, style: "edgy", image: "images/puffer.png" },
+    { name: "Pink Plaid Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "cute", image: "images/plaid_skirt.png" },
+    { name: "Pink Tank Top", type: "top", warmth_level: 2, waterproof: 0, style: "cute", image: "images/pink_tank.png" },
+    { name: "Pink Sweater", type: "top", warmth_level: 6, waterproof: 0, style: "cute", image: "images/pink_sweater.png" },
+    { name: "Pink Long Sleeve Shirt", type: "top", warmth_level: 5, waterproof: 0, style: "cute", image: "images/pink_longsleeve.png" },
+    {name: "Lightwash Jeans", type: "bottom", warmth_level: 5, waterproof: 0, style: "casual", image: "images/lightwash_jeans.png"},
+    {name: "Distressed Jeans", type: "bottom", warmth_level: 5, waterproof: 0, style: "edgy", image: "images/distressed_jeans.png"},
+    {name: "Denim Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/denim_skirt.png"},
+    {name: "Pink Racer Jacket", type: "top", warmth_level: 7, waterproof: 0, style: "cute", image: "images/cute_racer.png"},
+    {name: "Edgy Graphic Hoodie", type: "top", warmth_level: 8, waterproof: 0, style: "edgy", image: "images/cool_zipup.png"},
+    {name: "Cheetah Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/cheetah_skirt.png"},
+    {name: "Brown Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "casual", image: "images/brown_skirt.png"}
+
 ];
 
 db.serialize(() => {

@@ -24,8 +24,18 @@ function pickOutfit(weather, clothes, aesthetic = "casual") {
         }
     }
 
+    const pickRandom = (items) => {
+        if (!items.length) return null;
+        return items[Math.floor(Math.random() * items.length)];
+    };
+
     const pick = (type) => {
-        return candidates.find(c => c.type === type) || clothes.find(c => c.type === type) || null;
+        const typeCandidates = candidates.filter(c => c.type === type);
+        if (typeCandidates.length) {
+            return pickRandom(typeCandidates);
+        }
+        const fallbackCandidates = clothes.filter(c => c.type === type);
+        return pickRandom(fallbackCandidates);
     };
 
     return {
