@@ -1,6 +1,15 @@
+const aestheticButtons = document.querySelectorAll(".aesthetic-btn");
+aestheticButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        aestheticButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+    });
+});
+
 document.getElementById("getOutfitBtn").addEventListener("click", async () => {
     const city = document.getElementById("cityInput").value.trim();
-    const aesthetic = document.getElementById("aestheticSelect").value;
+    const activeAesthetic = document.querySelector(".aesthetic-btn.active");
+    const aesthetic = activeAesthetic ? activeAesthetic.dataset.value : "cute";
     const units = document.getElementById("unitSelect").value;
     const result = document.getElementById("result");
 
