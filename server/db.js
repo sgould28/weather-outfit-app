@@ -38,7 +38,27 @@ const defaultClothes = [
     {name: "Pink Racer Jacket", type: "top", warmth_level: 7, waterproof: 0, style: "cute", image: "images/cute_racer.png"},
     {name: "Edgy Graphic Hoodie", type: "top", warmth_level: 8, waterproof: 0, style: "edgy", image: "images/cool_zipup.png"},
     {name: "Cheetah Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/cheetah_skirt.png"},
-    {name: "Brown Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "casual", image: "images/brown_skirt.png"}
+    {name: "Brown Skirt", type: "bottom", warmth_level: 4, waterproof: 0, style: "casual", image: "images/brown_skirt.png"},
+    {name: "Black Converse", type: "shoes", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/black_converse.png"},
+    {name: "Black Hoodie", type: "top", warmth_level: 8, waterproof: 0, style: "casual", image: "images/black_hoodie.png"},
+    {name: "Black Jorts", type: "bottom", warmth_level: 3, waterproof: 0, style: "edgy", image: "images/black_jorts.png"},
+    {name: "Black Platform Heels", type: "shoes", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/black_platforms.png"},
+    {name: "Blue Sneakers", type: "shoes", warmth_level: 4, waterproof: 0, style: "casual", image: "images/blue_addidas.png"},
+    {name: "Blue Zip-Up", type: "top", warmth_level: 7, waterproof: 0, style: "casual", image: "images/blue_zip.png"},
+    {name: "Blueberry Tee", type: "top", warmth_level: 3, waterproof: 0, style: "casual", image: "images/blueberry_tee.png"},
+    {name: "Grey Collared Sweater", type: "top", warmth_level: 6, waterproof: 0, style: "casual", image: "images/grey_collared_sweater.png"},
+    {name: "Grey Long Sleeve Shirt", type: "top", warmth_level: 5, waterproof: 0, style: "casual", image: "images/grey_longsleeve.png"},
+    {name: "Jean Skirt With a Belt", type: "bottom", warmth_level: 4, waterproof: 0, style: "edgy", image: "images/jean_belt_skirt.png"},
+    {name: "Leather Skirt", type: "bottom", warmth_level: 5, waterproof: 1, style: "edgy", image: "images/leather_skirt.png"},
+    {name: "Light Jeans", type: "bottom", warmth_level: 5, waterproof: 0, style: "casual", image: "images/light_jeans.png"},
+    {name: "Pink Heels", type: "shoes", warmth_level: 4, waterproof: 0, style: "cute", image: "images/pink_heels.png"},
+    {name: "Pink Hoodie", type: "top", warmth_level: 8, waterproof: 0, style: "cute", image: "images/pink_hoodie.png"},
+    {name: "Red Lacy Tank Top", type: "top", warmth_level: 2, waterproof: 0, style: "edgy", image: "images/red_lace_tank.png"},
+    {name: "Red Velvet Pants", type: "bottom", warmth_level: 6, waterproof: 0, style: "edgy", image: "images/red_velvet_pants.png"},
+    {name: "Ripped Jeans", type: "bottom", warmth_level: 5, waterproof: 0, style: "edgy", image: "images/ripped_jeans.png"},
+    {name: "Star Tube Top", type: "top", warmth_level: 2, waterproof: 0, style: "edgy", image: "images/star_tube_top.png"},
+    {name: "Striped Shirt", type: "top", warmth_level: 5, waterproof: 0, style: "edgy", image: "images/striped_longsleeve.png"},
+    {name: "White Puffer Jacket", type: "top", warmth_level: 9, waterproof: 1, style: "casual", image: "images/white_puffer.png"}
 
 ];
 

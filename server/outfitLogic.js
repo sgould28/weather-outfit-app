@@ -1,4 +1,4 @@
-function pickOutfit(weather, clothes, aesthetic = "casual") {
+function pickOutfit(weather, clothes, aesthetic = "casual", units = "metric") {
     const temp = weather?.main?.temp ?? 20;
     const raining = weather?.weather?.[0]?.main.toLowerCase().includes("rain");
     const style = (aesthetic || "casual").toLowerCase();
@@ -9,12 +9,24 @@ function pickOutfit(weather, clothes, aesthetic = "casual") {
         candidates = styleMatches;
     }
 
-    if (temp < 10) {
-        const coldCandidates = candidates.filter(c => c.warmth_level >= 7);
-        if (coldCandidates.length) candidates = coldCandidates;
-    } else if (temp > 25) {
-        const warmCandidates = candidates.filter(c => c.warmth_level <= 4);
-        if (warmCandidates.length) candidates = warmCandidates;
+    if (units === "metric") {
+        // Celsius thresholds
+        if (temp < 10) {
+            const coldCandidates = candidates.filter(c => c.warmth_level >= 7);
+            if (coldCandidates.length) candidates = coldCandidates;
+        } else if (temp > 25) {
+            const warmCandidates = candidates.filter(c => c.warmth_level <= 4);
+            if (warmCandidates.length) candidates = warmCandidates;
+        }
+    } else if (units === "imperial") {
+        // Fahrenheit thresholds
+        if (temp < 50) {
+            const coldCandidates = candidates.filter(c => c.warmth_level >= 7);
+            if (coldCandidates.length) candidates = coldCandidates;
+        } else if (temp > 77) {
+            const warmCandidates = candidates.filter(c => c.warmth_level <= 4);
+            if (warmCandidates.length) candidates = warmCandidates;
+        }
     }
 
     if (raining) {
@@ -34,7 +46,7 @@ function pickOutfit(weather, clothes, aesthetic = "casual") {
         if (typeCandidates.length) {
             return pickRandom(typeCandidates);
         }
-        const fallbackCandidates = clothes.filter(c => c.type === type);
+        const fallbackCandidates = clothes.filter(c => c.type === type && (c.style === style || c.style === "all"));
         return pickRandom(fallbackCandidates);
     };
 

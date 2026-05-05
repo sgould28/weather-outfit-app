@@ -42,7 +42,7 @@ app.get("/outfit", async (req, res) => {
         }
 
         const clothes = await db.getClothes();
-        const outfit = pickOutfit(weather, clothes, aesthetic || "casual");
+        const outfit = pickOutfit(weather, clothes, aesthetic || "casual", units);
 
         res.json({
             aesthetic: aesthetic || "casual",
